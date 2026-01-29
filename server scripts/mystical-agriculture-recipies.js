@@ -1,23 +1,21 @@
-ServerEvents.recipes(event => {
-  let mystblockup = (input, output) => {
-    event.shaped(
-      Item.of(output, 1), // arg 1: output
-      [
-        'AAA',
-        'ABA',
-        'AAA'
-      ],
-      {
-        A: input,
-        B: 'mysticalagriculture:master_infusion_crystal'
-      }
-    ).keepIngredient('mysticalagriculture:master_infusion_crystal').id('kubejs:mystical_agriculture/block_upgrade/' + output.split(':')[1])
+
+
+BlockEvents.broken(event => {
+  if (event.block.hasTag('c:crops')) {
+    if (event.player.isPlayer()) {
+      event.block.popExperience(Math.floor(Math.random() * 4) + 1);
+    }
   }
-  mystblockup('mysticalagriculture:inferium_block', 'mysticalagriculture:prudentium_block')
-  mystblockup('mysticalagriculture:prudentium_block', 'mysticalagriculture:tertium_block')
-  mystblockup('mysticalagriculture:tertium_block', 'mysticalagriculture:imperium_block')
-  mystblockup('mysticalagriculture:imperium_block', 'mysticalagriculture:supremium_block')
+});
+
+
+PlayerEvents.respawned(event => {
+    let xp = event.player.xpLevels;
+    if(xp >= 5) {
+      event.player.setExperienceLevels(Math.max(Math.floor(xp/2,5)));
+    }  
 })
+
 
 //Tier 1 (Inferium): Basic tier, used to start the mod.
 //Tier 2 (Prudentium): Upgraded from Inferium, used for faster growth and better gear.
