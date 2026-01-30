@@ -4,13 +4,13 @@ StartupEvents.registry('irons_spellbooks:spells', event => {
     .setCooldownSeconds(5)
     .setManaCostPerLevel(100)
     .setCastType('instant')
-    .setSchool('irons_spellbooks:eldritch')
+    .setSchool('irons_spellbooks:blood')
     .setMinRarity('legendary')
     .setMaxLevel(1)
     .setFinishSound('item.honey_bottle.drink')
     .onCast(ctx => global.dismantle(ctx))
     .setAllowLooting(true)
-    .needsLearning(true)
+    .needsLearning(false)
     .canBeCraftedBy(player => true)
     .setUniqueInfo((spellLevel, caster) => {
       return [
