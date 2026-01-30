@@ -16,4 +16,9 @@ PlayerEvents.respawned(event => { //XP Loss on death
     }  
 })
 
-
+ServerEvents.recipes(event =>  {
+  let haunt = (input='', output) => {
+    event.recipes.create.haunting(output, input);
+  }
+  haunt('minecraft:bone_meal', CreateItem.of('mysticalagriculture:mystical_fertilizer', .5));
+})
